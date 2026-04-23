@@ -94,7 +94,7 @@ Configuration
 | `MCP_AUTH_TOKEN`     | unset          | If set, `/mcp` requires `Authorization: Bearer <token>` |
 | `FETCH_TIMEOUT_MS`   | `20000`        | Outbound fetch timeout                                  |
 | `MAX_RESPONSE_BYTES` | `5000000`      | Maximum response body size                              |
-| `SCRAPER_USER_AGENT` | Chrome-like UA | `User-Agent` used for outbound fetches                  |
+| `SCRAPER_USER_AGENT` | Chrome-like UA | `User-Agent` used with browser-like fetch headers       |
 
 If `MCP_AUTH_TOKEN` is not set, the MCP endpoint is public. Set it before
 deploying to a publicly reachable Deno Deploy URL unless you intentionally want

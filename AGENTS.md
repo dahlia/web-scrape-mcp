@@ -43,7 +43,7 @@ All outbound URL fetches should go through the helper code in *src/scrape.ts*.
 Keep these constraints intact:
 
  -  Only `http:` and `https:` URLs are accepted.
- -  Requests use a browser-like `User-Agent`.
+ -  Requests use a browser-like `User-Agent` and document navigation headers.
  -  Requests have a timeout.
  -  Response bodies have a maximum byte size.
  -  `robots.txt` is not checked.

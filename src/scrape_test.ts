@@ -59,10 +59,10 @@ Deno.test("rawFetch returns response text without requiring a 2xx status", async
   assertEquals(text, "not found");
 });
 
-Deno.test("rawFetch sends the configured browser-like user agent", async () => {
-  let seenUserAgent: string | null = null;
+Deno.test("rawFetch sends browser-like navigation headers", async () => {
+  let seenHeaders = new Headers();
   const fetcher: Fetcher = (_input, init) => {
-    seenUserAgent = new Headers(init?.headers).get("user-agent");
+    seenHeaders = new Headers(init?.headers);
     return Promise.resolve(new Response("ok"));
   };
 
@@ -73,7 +73,12 @@ Deno.test("rawFetch sends the configured browser-like user agent", async () => {
     userAgent: "UnitTestBrowser/1.0",
   });
 
-  assertEquals(seenUserAgent, "UnitTestBrowser/1.0");
+  assertEquals(seenHeaders.get("user-agent"), "UnitTestBrowser/1.0");
+  assertEquals(seenHeaders.get("sec-fetch-dest"), "document");
+  assertEquals(seenHeaders.get("sec-fetch-mode"), "navigate");
+  assertEquals(seenHeaders.get("sec-fetch-site"), "none");
+  assertEquals(seenHeaders.get("sec-fetch-user"), "?1");
+  assertEquals(seenHeaders.get("upgrade-insecure-requests"), "1");
 });
 
 Deno.test("fetch helpers reject non-HTTP URLs", async () => {
