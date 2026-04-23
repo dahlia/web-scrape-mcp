@@ -1,0 +1,29 @@
+{
+  "imports": {
+    "@paoramen/cheer-reader": "jsr:@paoramen/cheer-reader@0.1.2",
+    "@std/assert": "jsr:@std/assert@1",
+    "cheerio": "npm:cheerio@1.2.0",
+    "fastmcp/edge": "npm:fastmcp@4.0.0/edge",
+    "turndown": "npm:turndown@7.2.2",
+    "zod": "npm:zod@4.3.6"
+  },
+  "tasks": {
+    "check": "deno check src/main.ts src/*_test.ts",
+    "dev": "deno run --allow-net --allow-env --watch src/main.ts",
+    "fmt": "deno fmt && hongdown -w README.md AGENTS.md",
+    "start": "deno run --allow-net --allow-env src/main.ts",
+    "test": "deno test --allow-env"
+  },
+  "fmt": {
+    "exclude": [
+      "AGENTS.md",
+      "README.md"
+    ]
+  },
+  "deploy": {
+    "runtime": {
+      "type": "dynamic",
+      "entrypoint": "src/main.ts"
+    }
+  }
+}
